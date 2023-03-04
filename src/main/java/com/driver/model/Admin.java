@@ -19,6 +19,12 @@ public class Admin {
 
     }
 
+    public Admin(String username, String password, List<ServiceProvider> serviceProviders) {
+        this.username = username;
+        this.password = password;
+        this.serviceProviders = serviceProviders;
+    }
+
     public List<ServiceProvider> getServiceProviders() {
         return serviceProviders;
     }
