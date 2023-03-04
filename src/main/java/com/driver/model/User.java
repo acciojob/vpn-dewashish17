@@ -2,6 +2,7 @@ package com.driver.model;
 
 import javax.persistence.*;
 import java.security.PrivateKey;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,20 +27,20 @@ public class User {
     private String maskedIp;
 
     //6th attribute
-    private Boolean connected;
+    private Boolean connected=false;
 
     //7th attribute
     @ManyToMany
-    @JoinTable(name = "user_service_provider",joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "id"))
-    List<ServiceProvider> serviceProviderList;
+    @JoinColumn
+    List<ServiceProvider> serviceProviderList=new ArrayList<>();
 
     //8th attribute
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    List<Connection> connectionList;
+    List<Connection> connectionList=new ArrayList<>();
 
     //9th attribute
-    @OneToOne(mappedBy = "user")
-    Country country;
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    private Country originalCountry;
 
     public User() {
     }
@@ -53,7 +54,7 @@ public class User {
         this.connected = connected;
         this.serviceProviderList = serviceProviderList;
         this.connectionList = connectionList;
-        this.country = country;
+        this.originalCountry = country;
     }
 
     public int getId() {
@@ -120,11 +121,11 @@ public class User {
         this.connectionList = connectionList;
     }
 
-    public Country getCountry() {
-        return country;
+    public Country getOriginalCountry() {
+        return originalCountry;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setOriginalCountry(Country country) {
+        this.originalCountry = country;
     }
 }
