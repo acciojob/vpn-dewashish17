@@ -16,10 +16,10 @@ public class AdminController {
     AdminService adminService;
 
     @PostMapping("/register")
-    public ResponseEntity<Admin> registerAdmin(@RequestParam String username, @RequestParam String password){
+    public ResponseEntity<Void> registerAdmin(@RequestParam String username, @RequestParam String password){
         //create an admin and return
         Admin admin = adminService.register(username, password);
-        return new ResponseEntity<>(admin,HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/addProvider")
